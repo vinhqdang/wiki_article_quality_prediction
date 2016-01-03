@@ -20,6 +20,7 @@ Our implementation is built based on the implementation presented at [1].
 
 ### enwiki
 
+```
 pred
 actual  stub start   c   b  ga  fa
   stub   925    48   0   0   1   0
@@ -28,7 +29,8 @@ actual  stub start   c   b  ga  fa
   b        0     0  73 896   1   7
   ga       0    13   4   1 883  66
   fa       1     2  26   3  21 941
-[1] "Accuracy = 0.924095771777891"
+"Accuracy = 0.924095771777891"
+```
 
 # References
 
