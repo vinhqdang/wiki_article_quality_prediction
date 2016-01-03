@@ -16,9 +16,9 @@ The list of models can be found [here](https://github.com/wiki-ai/editquality/bl
 
 Our implementation is built based on the implementation presented at [1].
 
-## Results (2016 - 01 - 03)
+## Results 
 
-### enwiki
+### enwiki (2016 - 01 - 03)
 
 ```
         pred
