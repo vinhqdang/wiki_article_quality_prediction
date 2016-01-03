@@ -21,7 +21,7 @@ Our implementation is built based on the implementation presented at [1].
 ### enwiki
 
 ```
-pred
+        pred
 actual  stub start   c   b  ga  fa
   stub   925    48   0   0   1   0
   start   47   919   1   1  35   4
