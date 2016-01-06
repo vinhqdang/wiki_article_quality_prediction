@@ -1,5 +1,9 @@
 seed = 2015
 
+list.of.packages <- c("pnn")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+
 # read data file
 # data file should contains list of features and quality class (FA, GA ...)
 # separate into train and test set
