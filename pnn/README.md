@@ -24,8 +24,8 @@ You need to install [R](https://www.r-project.org/) and optional [RStudio](https
 setwd ("path to PNN.R")
 source ("PNN.R")
 
-# at first time, you need to install package pnn
-install.package ("pnn")
+# at first time, you will need to install package pnn
+# the script will do it automatically for you
 
 # run everything
 # it will take a while
