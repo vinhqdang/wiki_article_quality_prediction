@@ -1,8 +1,9 @@
 seed = 2015
 
-list.of.packages <- c("pnn")
-new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
-if(length(new.packages)) install.packages(new.packages)
+if (!require(pnn)) {
+  install.packages("pnn")
+  library (pnn)
+}
 
 # read data file
 # data file should contains list of features and quality class (FA, GA ...)
