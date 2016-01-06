@@ -16,6 +16,22 @@ The list of models can be found [here](https://github.com/wiki-ai/editquality/bl
 
 Our implementation is built based on the implementation presented at [1].
 
+## Running
+
+You need to install [R](https://www.r-project.org/) and optional [RStudio](https://www.rstudio.com/)
+
+```r
+setwd ("path to PNN.R")
+source ("PNN.R")
+
+# at first time, you need to install package pnn
+install.package ("pnn")
+
+# run everything
+# it will take a while
+runAll ()
+```
+
 ## Results 
 
 ### enwiki (2016 - 01 - 03)
