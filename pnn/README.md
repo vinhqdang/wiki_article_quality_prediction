@@ -10,7 +10,7 @@ Data is provided by Wikimedia Foundation.
 
 The data set of English Wikipedia contains ~ 30 000 articles which are rated (Stub, Start, C, B, GA, FA). Each article is parsed and calculated 24 features.
 
-The list of models can be found [here](https://github.com/wiki-ai/editquality/blob/master/editquality/feature_lists/enwiki.py)
+The list of models can be found [here](https://github.com/wiki-ai/wikiclass/blob/master/wikiclass/feature_lists/enwiki.py)
 
 # Implementation
 
