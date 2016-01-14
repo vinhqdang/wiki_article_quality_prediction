@@ -31,6 +31,7 @@ buildModel = function (train_frame, sigma = 0.5)
   y = train_frame[,ncol(train_frame)]
   train_frame[,ncol(train_frame)] = NULL
   train_frame = scale(train_frame)
+  train_frame[is.na(train_frame)] <- 0
   train_frame = cbind (as.factor(y), train_frame)
   library(pnn)
   fit = pnn::smooth(pnn::learn(data.frame(y, train_frame)), sigma = sigma)
@@ -42,12 +43,14 @@ performModel = function (model, test_frame) {
   y = test_frame[,ncol(test_frame)]
   test_frame[,ncol(test_frame)] = NULL
   test_frame = scale(test_frame)
+  test_frame[is.na(test_frame)] <- 0
   test_frame = cbind (as.factor(y), test_frame)
   
   nbTest = nrow (test_frame)
   pred = c()
   actual = c()
   
+  print (paste("There are", nbTest, "items in test set"))
   for (i in 1:nbTest) {
     print (paste("Element",i))
     cur_pred = guess (model, as.matrix (test_frame[i,]))
@@ -60,21 +63,42 @@ performModel = function (model, test_frame) {
 }
 
 # run everything from beginning
-runAll = function ()
+runAll = function (language = "en")
 {
+  data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  if (language == "en") {
+    data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  }
+  else if (language == "fr") {
+    data_file = "../data/article_quality/frwiki.features_wp10.9k.tsv"
+  }
+  else {
+    stop ("Language not supported.")
+  }
   print ("Loading data")
-  data = loadData()
+  data = loadData(data_file_name = data_file)
   print ("Building model")
   model = buildModel (train_frame = data[[1]])
   print ("Perform the model")
   model_performance = performModel (model = model, test_frame = data[[2]])
   
   # Building confusion matrix 
-  actual = factor(model_performance[[1]], levels = c("stub", "start","c","b","ga","fa"))
-  pred = factor(model_performance[[2]], levels = c("stub", "start","c","b","ga","fa"))
-  t = table (actual, pred)
-  
-  print (t)
-  
-  print (paste("Accuracy =", sum(diag(t))/sum(t)))
+  if (language == "en") {
+    actual = factor(model_performance[[1]], levels = c("stub", "start","c","b","ga","fa"))
+    pred = factor(model_performance[[2]], levels = c("stub", "start","c","b","ga","fa"))
+    t = table (actual, pred)
+    
+    print (t)
+    
+    print (paste("Accuracy =", sum(diag(t))/sum(t)))
+  }
+  else if (language == "fr") {
+    actual = factor(model_performance[[1]], levels = c("e", "bd","b","a","ba","adq"))
+    pred = factor(model_performance[[2]], levels = c("e", "bd","b","a","ba","adq"))
+    t = table (actual, pred)
+    
+    print (t)
+    
+    print (paste("Accuracy =", sum(diag(t))/sum(t)))
+  }
 }

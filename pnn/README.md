@@ -27,9 +27,15 @@ source ("PNN.R")
 # at first time, you will need to install package pnn
 # the script will do it automatically for you
 
-# run everything
+# run everything from beginning
 # it will take a while
-runAll ()
+
+# For English Wikipedia
+# default
+runAll (language = "en")
+
+# For French Wikipedia
+runAll (language = "fr")
 ```
 
 ## Results 
@@ -46,6 +52,20 @@ actual  stub start   c   b  ga  fa
   ga       0    13   4   1 883  66
   fa       1     2  26   3  21 941
 "Accuracy = 0.924095771777891"
+```
+
+### frwiki (2016 - 01 - 14)
+
+```
+        pred
+actual   e  bd   b   a  ba adq
+   e   280  22   0   0   1   0
+   bd   26 276   1   1   8   0
+   b     3   3 280   3  16  13
+   a     0   0   4 270   0  20
+   ba    0   2   6   0 279   1
+   adq   0   0   3   4   2 267
+[1] "Accuracy = 0.922389726409827"
 ```
 
 # References
