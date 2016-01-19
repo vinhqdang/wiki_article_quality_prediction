@@ -1,4 +1,4 @@
-seed = 2015
+#set.seed(2015)
 
 if (!require(pnn)) {
   install.packages("pnn")
@@ -101,4 +101,22 @@ runAll = function (language = "en")
     
     print (paste("Accuracy =", sum(diag(t))/sum(t)))
   }
+}
+
+
+#rerun the algorithm of Warncke on
+# Warncke-Wang, M., Ayukaev, V.R., Hecht, B. and Terveen, L.G., 2015, February. 
+# The Success and Failure of Quality Improvement Projects in Peer Production Communities. 
+# In Proceedings of the 18th ACM Conference on Computer Supported Cooperative Work & Social Computing (pp. 743-756). ACM.
+warckne2015 = function ()
+{
+  data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  data = loadData(data_file_name = data_file)
+  train = data[[1]]
+  test = data[[2]]
+  library (randomForest)
+  rf = randomForest(V25 ~ V2 + V15 + V9 + V5 + V6 + V1 + V4 + V8 + V7 + V11 + V13, data = train, ntree = 501, nodesize = 8)
+  pred_rf = predict(rf, newdata = test)
+  t = table (test$V25, pred_rf)
+  print (paste ("Accuracy =", sum (diag(t))/sum(t)))
 }
