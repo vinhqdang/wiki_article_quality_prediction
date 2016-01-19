@@ -68,6 +68,21 @@ actual   e  bd   b   a  ba adq
 [1] "Accuracy = 0.922389726409827"
 ```
 
+## Misc
+
+### Comparison with [2]
+
+We provided a function to re-run the implementation of [2]
+
+```r
+# You should have the package randomForest installed already
+warckne2015 ()
+```
+
+You should achieve the accuracy around 58%.
+
 # References
 
 [1] Nigel Lewis (2015), *Build Your Own Neural Network Today!: With step by step instructions showing you how to build them faster than you imagined possible using R*, Create Space publisher. [Amazon](http://www.amazon.com/Build-Your-Neural-Network-Today/dp/1519101236/ref=sr_1_1?ie=UTF8&qid=1451808556&sr=8-1&keywords=build+your+own+neural+network+todays)
+
+[2] Warncke-Wang, M., Ayukaev, V.R., Hecht, B. and Terveen, L.G., 2015, February. The Success and Failure of Quality Improvement Projects in Peer Production Communities. In Proceedings of the 18th ACM Conference on Computer Supported Cooperative Work & Social Computing (pp. 743-756). ACM.
