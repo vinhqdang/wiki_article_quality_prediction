@@ -79,6 +79,20 @@ We provided a function to re-run the implementation of [2]
 warckne2015 ()
 ```
 
+### Comparison with kNN
+
+```r
+classifyWithKNN (language = "en")
+classifyWithKNN (language = "fr")
+```
+
+### Comparison with CART
+
+```r
+classifyWithCART (language = "en")
+classifyWithCART (language = "fr")
+```
+
 You should achieve the accuracy around 58%.
 
 # References

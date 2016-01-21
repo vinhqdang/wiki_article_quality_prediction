@@ -1,4 +1,4 @@
-#set.seed(2015)
+set.seed(2015)
 
 if (!require(pnn)) {
   install.packages("pnn")
@@ -119,4 +119,75 @@ warckne2015 = function ()
   pred_rf = predict(rf, newdata = test)
   t = table (test$V25, pred_rf)
   print (paste ("Accuracy =", sum (diag(t))/sum(t)))
+}
+
+# return the accuracy when classify with kNN
+classifyWithKNN = function (language = "en", k = 101)
+{
+  data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  if (language == "en") {
+    data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  }
+  else if (language == "fr") {
+    data_file = "../data/article_quality/frwiki.features_wp10.9k.tsv"
+  }
+  else {
+    stop ("Language not supported.")
+  }
+  print ("Loading data")
+  data = loadData(data_file_name = data_file)
+  train = data [[1]]
+  test = data[[2]]
+  
+  if (!require(class)) {
+    install.packages("class")
+  }
+  library(class)
+  
+  n_col = ncol(train)
+  
+  model = knn(train = train[,1:(n_col - 1)], test = test[,1:(n_col - 1)], k = k, cl = train[,ncol(train)])
+  table1 <- table (model, test[,ncol(test)])
+  
+  print ("Confusion matrix")
+  print (table1)
+  print (paste("Accuracy of kNN is:", sum (diag(table1)) / sum (table1)))
+}
+
+# classifying with CART
+classifyWithCART = function (language = "en")
+{
+  data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  if (language == "en") {
+    data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  }
+  else if (language == "fr") {
+    data_file = "../data/article_quality/frwiki.features_wp10.9k.tsv"
+  }
+  else {
+    stop ("Language not supported.")
+  }
+  print ("Loading data")
+  data = loadData(data_file_name = data_file)
+  train = data [[1]]
+  test = data[[2]]
+  
+  if (!require(rpart)) {
+    install.packages("rpart")
+  }
+  library(rpart)
+  
+  n_col = ncol(train)
+  
+  if (language == "en") {
+    cart_model <- rpart(train$V25 ~ ., data = train, method = "class")
+  } 
+  else if (language == "fr") {
+    cart_model <- rpart(train$V26 ~ ., data = train, method = "class")
+  }
+  predictR <- predict(cart_model, newdata = test, type = "class")
+  table1 <- table(test[[n_col]], predictR)
+  print ("Confusion matrix")
+  print (table1)
+  print (paste("Accuracy of CART is:", sum (diag(table1)) / sum (table1)))
 }
