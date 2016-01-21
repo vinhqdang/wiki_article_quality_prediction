@@ -18,7 +18,9 @@ Our implementation is built based on the implementation presented at [1].
 
 ## Running
 
-You need to install [R](https://www.r-project.org/) and optional [RStudio](https://www.rstudio.com/)
+You need to install [R](https://www.r-project.org/) and optional [RStudio](https://www.rstudio.com/).
+
+We set the seed number to 2015 for reproducibility. You can change to another value.
 
 ```r
 setwd ("path to PNN.R")
@@ -78,6 +80,7 @@ We provided a function to re-run the implementation of [2]
 # You should have the package randomForest installed already
 warckne2015 ()
 ```
+You should achieve the accuracy around 58%.
 
 ### Comparison with kNN
 
@@ -86,6 +89,8 @@ classifyWithKNN (language = "en")
 classifyWithKNN (language = "fr")
 ```
 
+You should achieve the accuracy around 51%.
+
 ### Comparison with CART
 
 ```r
@@ -93,7 +98,9 @@ classifyWithCART (language = "en")
 classifyWithCART (language = "fr")
 ```
 
-You should achieve the accuracy around 58%.
+You should achieve the accuracy around 50%.
+
+
 
 # References
 
