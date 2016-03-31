@@ -14,7 +14,7 @@ The list of models can be found [here](https://github.com/wiki-ai/wikiclass/blob
 
 # Implementation
 
-Our implementation is built based on the implementation presented at [1].
+Our implementation is built based on the code presented in [1].
 
 ## Running
 
@@ -26,50 +26,21 @@ We set the seed number to 2015 for reproducibility. You can change to another va
 setwd ("path to PNN.R")
 source ("PNN.R")
 
-# at first time, you will need to install package pnn
+# at first time, you will need to install several packages if you did not install them before
 # the script will do it automatically for you
 
 # run everything from beginning
 # it will take a while
 
+# By default, the 5-folds cross validation will be performed. You can change the parameter *nfolds* as you wish.
+
 # For English Wikipedia
 # default
-runAll (language = "en")
+classifyWithPNN (language = "en", nfolds = 5)
 
 # For French Wikipedia
-runAll (language = "fr")
+classifyWithPNN (language = "fr", nfolds = 5)
 ```
-
-## Results 
-
-### enwiki (2016 - 01 - 03)
-
-```
-        pred
-actual  stub start   c   b  ga  fa
-  stub   925    48   0   0   1   0
-  start   47   919   1   1  35   4
-  c        0     2 878  61   0  29
-  b        0     0  73 896   1   7
-  ga       0    13   4   1 883  66
-  fa       1     2  26   3  21 941
-"Accuracy = 0.924095771777891"
-```
-
-### frwiki (2016 - 01 - 14)
-
-```
-        pred
-actual   e  bd   b   a  ba adq
-   e   280  22   0   0   1   0
-   bd   26 276   1   1   8   0
-   b     3   3 280   3  16  13
-   a     0   0   4 270   0  20
-   ba    0   2   6   0 279   1
-   adq   0   0   3   4   2 267
-[1] "Accuracy = 0.922389726409827"
-```
-
 ## Misc
 
 ### Comparison with [2]
@@ -80,7 +51,14 @@ We provided a function to re-run the implementation of [2]
 # You should have the package randomForest installed already
 warckne2015 ()
 ```
-You should achieve the accuracy around 58%.
+
+
+### Comparison with Multinomial Logistic Regression
+
+```r
+classifyWithMultinominalLogisticRegression (language = "en", nfolds = 5)
+classifyWithMultinominalLogisticRegression (language = "fr", nfolds = 5)
+```
 
 ### Comparison with kNN
 
@@ -89,18 +67,21 @@ classifyWithKNN (language = "en")
 classifyWithKNN (language = "fr")
 ```
 
-You should achieve the accuracy around 51%.
 
 ### Comparison with CART
 
 ```r
-classifyWithCART (language = "en")
-classifyWithCART (language = "fr")
+classifyWithCART (language = "en", nfolds = 5)
+classifyWithCART (language = "fr", nfolds = 5)
 ```
 
-You should achieve the accuracy around 50%.
 
+### Comparison with SVM
 
+```r
+classifyWithSVM(language = "en", nfolds = 5)
+classifyWithSVM(language = "fr", nfolds = 5)
+```
 
 # References
 
