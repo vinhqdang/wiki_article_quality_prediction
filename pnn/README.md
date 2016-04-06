@@ -16,6 +16,12 @@ The data set of English Wikipedia contains ~ 30 000 articles which are rated (St
 
 The list of models can be found [here](https://github.com/wiki-ai/wikiclass/blob/master/wikiclass/feature_lists/enwiki.py)
 
+## French Wikipedia (frwiki)
+
+The data set of French Wikipedia contains ~ 9 000 articles which are rated (E, BD, B, A, BA, AQ). Each article is parsed and calculated 25 features.
+
+The list of models can be found [here](https://github.com/wiki-ai/wikiclass/blob/master/wikiclass/feature_lists/frwiki.py)
+
 # Implementation
 
 Our implementation is built based on the code presented in [1].
