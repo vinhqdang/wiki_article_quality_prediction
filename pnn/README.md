@@ -45,10 +45,9 @@ classifyWithPNN (language = "fr", nfolds = 5)
 
 ### Classification with [2]
 
-We provided a function to re-run the implementation of [2]
+We provided a function to re-run the implementation of [2]. The function works only with English dataset.
 
 ```r
-# You should have the package randomForest installed already
 warckne2015 ()
 ```
 
