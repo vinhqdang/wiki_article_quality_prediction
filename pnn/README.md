@@ -6,6 +6,10 @@ This directory contains my implementation to use Probabilistic Neural Network (P
 
 Data is provided by Wikimedia Foundation.
 
+## Note
+
+We used [h2o](http://www.h2o.ai/) for performing random forest. It is required that there is Java installed on your machine already.
+
 ## English Wikipedia (enwiki)
 
 The data set of English Wikipedia contains ~ 30 000 articles which are rated (Stub, Start, C, B, GA, FA). Each article is parsed and calculated 24 features.
