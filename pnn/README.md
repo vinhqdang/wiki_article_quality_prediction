@@ -41,9 +41,9 @@ classifyWithPNN (language = "en", nfolds = 5)
 # For French Wikipedia
 classifyWithPNN (language = "fr", nfolds = 5)
 ```
-## Misc
+## Compare with other classifying approaches
 
-### Comparison with [2]
+### Classification with [2]
 
 We provided a function to re-run the implementation of [2]
 
@@ -52,15 +52,23 @@ We provided a function to re-run the implementation of [2]
 warckne2015 ()
 ```
 
+### Classification with ORES approach
 
-### Comparison with Multinomial Logistic Regression
+We provided a function to re-run [ORES](https://blog.wikimedia.org/2015/11/30/artificial-intelligence-x-ray-specs) approach of Wikimedia Foundation.
+
+```r
+classifyWithORES (language = "en", nfolds = 5)
+classifyWithORES (language = "fr", nfolds = 5)
+```
+
+### Classification with Multinomial Logistic Regression
 
 ```r
 classifyWithMultinominalLogisticRegression (language = "en", nfolds = 5)
 classifyWithMultinominalLogisticRegression (language = "fr", nfolds = 5)
 ```
 
-### Comparison with kNN
+### Classification with kNN
 
 ```r
 classifyWithKNN (language = "en")
@@ -68,7 +76,7 @@ classifyWithKNN (language = "fr")
 ```
 
 
-### Comparison with CART
+### Classification with CART
 
 ```r
 classifyWithCART (language = "en", nfolds = 5)
@@ -76,7 +84,7 @@ classifyWithCART (language = "fr", nfolds = 5)
 ```
 
 
-### Comparison with SVM
+### Classification with SVM
 
 ```r
 classifyWithSVM(language = "en", nfolds = 5)

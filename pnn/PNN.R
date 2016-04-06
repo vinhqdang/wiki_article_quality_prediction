@@ -2,7 +2,7 @@ set.seed(2016)
 
 
 # install missing package if required
-list.of.packages <- c("pnn", "pROC","caret","e1071","fmsb", "nnet", "class", "rpart")
+list.of.packages <- c("pnn", "pROC","caret","e1071","fmsb", "nnet", "class", "rpart","h2o")
 new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
 if(length(new.packages)) install.packages(new.packages)
 
@@ -133,7 +133,6 @@ classifyWithPNN = function (language = "en", nfolds = 5)
   }
 }
 
-
 #rerun the algorithm of Warncke on
 # Warncke-Wang, M., Ayukaev, V.R., Hecht, B. and Terveen, L.G., 2015, February. 
 # The Success and Failure of Quality Improvement Projects in Peer Production Communities. 
@@ -141,14 +140,43 @@ classifyWithPNN = function (language = "en", nfolds = 5)
 warckne2015 = function ()
 {
   data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
-  data = loadData(data_file_name = data_file)
-  train = data[[1]]
-  test = data[[2]]
-  library (randomForest)
-  rf = randomForest(V25 ~ V2 + V15 + V9 + V5 + V6 + V1 + V4 + V8 + V7 + V11 + V13, data = train, ntree = 501, nodesize = 8)
-  pred_rf = predict(rf, newdata = test)
-  t = table (test$V25, pred_rf)
-  print (paste ("Accuracy =", sum (diag(t))/sum(t)))
+  data = read.table(data_file)
+  
+  library(h2o)
+  h2o.init()
+  rf = h2o.randomForest(y=25,x=c(2,15,9,5,6,1,4,8,7,11,13),training_frame = as.h2o(data), nfolds = 5, ntrees = 501)
+  print(rf)
+  h2o.shutdown(prompt = FALSE)
+}
+
+# classify with ORES service
+# https://blog.wikimedia.org/2015/11/30/artificial-intelligence-x-ray-specs
+classifyWithORES = function (language = "en", nfolds = 5)
+{
+  data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  if (language == "en") {
+    data_file = "../data/article_quality/enwiki.features_wp10.30k.tsv"
+  }
+  else if (language == "fr") {
+    data_file = "../data/article_quality/frwiki.features_wp10.9k.tsv"
+  }
+  else {
+    stop ("Language not supported.")
+  }
+  print ("Loading data")
+  data = read.table(data_file)
+  
+  library(h2o)
+  h2o.init()
+  if (language == "en") {
+    rf = h2o.randomForest(y=25,x=1:24,training_frame = as.h2o(data), nfolds = 5, ntrees = 501)
+    print(rf)
+  }
+  else if (language == "fr") {
+    rf = h2o.randomForest(y=26,x=1:25,training_frame = as.h2o(data), nfolds = 5, ntrees = 501)
+    print(rf)
+  }
+  h2o.shutdown(prompt = FALSE)
 }
 
 # return the accuracy when classify with kNN
